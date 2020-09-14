@@ -1,0 +1,95 @@
+.profile__info_container {
+  display: flex;
+  justify-content: space-between;
+  background: #3d312b;
+  padding: 20px 20px;
+  border: 2px solid #2f281d;
+}
+
+.profile__info_left {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile__level {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  background: #201b17;
+  border: 3px solid #58463a;
+  border-radius: 50%;
+  line-height: 0;
+}
+
+.profile__username_team {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.profile__username {
+  font-size: 16px;
+}
+
+.profile__team {
+  font-size: 12px;
+  color: whitesmoke;
+}
+
+.profile__info_right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero_table__container {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: space-between;
+  height: 350px;
+  background: url(../assets/hero-shape.png) no-repeat center;
+}
+
+.hero_table__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero_table__column .item__container {
+  margin-bottom: 15px;
+}
+
+.hero_table__row {
+  display: flex;
+  width: 127px;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.hero_attributes__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: rgba(128, 128, 128, 0.05);
+  border-radius: 10px;
+  margin: 15px 0px;
+  padding: 20px 0px;
+}
+
+.hero_attribute {
+  display: flex;
+  justify-content: center;
+}
+
+.hero_attribute_text {
+  margin-left: 5px;
+}
+
+.hero_attribute_points {
+  margin-left: 5px;
+}

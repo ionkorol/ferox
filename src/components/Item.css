@@ -1,0 +1,89 @@
+.item__container {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  background-color: #2f281d;
+  border: 3px solid #3b342d;
+  border-radius: 10px;
+}
+
+.item__head_icon {
+  background-image: url(../assets/head-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__shoulder_icon {
+  background-image: url(../assets/shoulder-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__chest_icon {
+  background-image: url(../assets/chest-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__pants_icon {
+  background-image: url(../assets/pants-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__shoes_icon {
+  background-image: url(../assets/shoes-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__gloves_icon {
+  background-image: url(../assets/gloves-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__cloack_icon {
+  background-image: url(../assets/cloack-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__ring_icon {
+  background-image: url(../assets/ring-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__necklace_icon {
+  background-image: url(../assets/necklace-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__sword_icon {
+  background-image: url(../assets/sword-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__shield_icon {
+  background-image: url(../assets/shield-placeholder.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item__container img {
+  border-radius: 10px;
+}

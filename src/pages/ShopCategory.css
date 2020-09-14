@@ -1,0 +1,26 @@
+.shop_item__container {
+  display: flex;
+  margin: 10px 20px;
+  padding: 10px;
+  background-color: rgba(128, 128, 128, 0.05);
+  border-radius: 10px;
+}
+
+.shop_item__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.shop_item__name {
+  display: flex;
+}
+
+.shop_item__stats {
+  font-size: small;
+}
+
+.shop_item__stat {
+  margin-right: 10px;
+}

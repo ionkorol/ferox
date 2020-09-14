@@ -1,0 +1,23 @@
+.menu_item__container {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0px;
+  border-bottom: 1px dotted gray;
+}
+
+.menu_item__container:hover {
+  background-color: #3f3c3c;
+  cursor: pointer;
+}
+
+.menu_item__text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_item__icon {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px 10px;
+}

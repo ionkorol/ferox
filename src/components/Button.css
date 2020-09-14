@@ -1,0 +1,19 @@
+.button__container {
+  background: #554539;
+  border: 3px solid #2f281d;
+  border-radius: 10px;
+}
+
+.button__inner-container {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  font-weight: bold;
+  border: 3px solid #715d4e;
+  border-radius: 10px;
+}
+
+.button__container:hover {
+  background-color: #715d4e;
+  cursor: pointer;
+}
