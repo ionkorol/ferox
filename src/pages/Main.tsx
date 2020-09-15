@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Main: React.FC<Props> = (props) => {
-  const { userData, userLogout } = props;
+  const { userLogout } = props;
 
   const handleLogout = () => {
     userLogout();
@@ -22,7 +22,7 @@ const Main: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <Header>Test</Header>
+      <Header>Town Center</Header>
       <div style={{ padding: "5px" }}>
         <img
           src="http://tiwar.net/images/town/hd/main_h.jpg"

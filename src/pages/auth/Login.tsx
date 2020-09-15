@@ -18,7 +18,7 @@ type Props = {
 };
 
 export const Login: React.FC<Props> = (props) => {
-  const { userLogin, userData, isAuthenticated, loading, error } = props;
+  const { userLogin, isAuthenticated, loading, error } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +37,7 @@ export const Login: React.FC<Props> = (props) => {
     if (isAuthenticated) {
       props.history.push("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, props.history]);
 
   return (
     <Container>

@@ -38,7 +38,7 @@ export const Signup: React.FC<Props> = (props) => {
     if (isAuthenticated) {
       props.history.push("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, props.history]);
 
   return (
     <Container>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { RootStateOrAny, connect } from "react-redux";
-import Button from "../components/Button";
 import Container from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -16,23 +15,7 @@ interface Props {
 
 export const Profile: React.FC<Props> = (props) => {
   const { userData } = props;
-
-  const [items, setItems] = useState<any>({});
-
-  useEffect(() => {
-    Object.entries(userData.items).forEach(([key, value]: any) => {
-      if (value) {
-        value.get().then((docSnap: any) => {
-          setItems((prevState: any) => ({
-            ...prevState,
-            [key]: docSnap.data(),
-          }));
-        });
-      } else {
-        setItems((prevState: any) => ({ ...prevState, [key]: null }));
-      }
-    });
-  }, []);
+  const { items } = userData;
 
   return (
     <Container>
@@ -51,26 +34,44 @@ export const Profile: React.FC<Props> = (props) => {
       </div>
       <div className="hero_table__container">
         <div className="hero_table__column">
-          <Item type="head" image={items.head ? items.head.image : ""} />
+          <Item placeholder="head" itemRef={items.head ? items.head : null} />
+          <Item placeholder="shoulder" itemRef={items.shoulder} />
           <Item
-            type="shoulder"
-            image={items.shoulder ? items.shoulder.image : ""}
+            placeholder="chest"
+            itemRef={items.chest ? items.chest : null}
           />
-          <Item type="chest" image={items.chest ? items.chest.image : ""} />
-          <Item type="pants" image={items.pants ? items.pants.image : ""} />
-          <Item type="shoes" image={items.shoes ? items.shoes.image : ""} />
+          <Item
+            placeholder="pants"
+            itemRef={items.pants ? items.pants : null}
+          />
+          <Item
+            placeholder="shoes"
+            itemRef={items.shoes ? items.shoes : null}
+          />
         </div>
         <div className="hero_table__row">
-          <Item type="sword" image={items.sword ? items.sword.image : ""} />
-          <Item type="shield" image={items.shield ? items.shield.image : ""} />
+          <Item
+            placeholder="sword"
+            itemRef={items.sword ? items.sword : null}
+          />
+          <Item
+            placeholder="shield"
+            itemRef={items.shield ? items.shield : null}
+          />
         </div>
         <div className="hero_table__column">
-          <Item type="gloves" image={items.gloves ? items.gloves.image : ""} />
-          <Item type="cloack" image={items.cloack ? items.cloack.image : ""} />
-          <Item type="ring" image={items.ring ? items.ring.image : ""} />
           <Item
-            type="necklace"
-            image={items.necklace ? items.necklace.image : ""}
+            placeholder="gloves"
+            itemRef={items.gloves ? items.gloves : null}
+          />
+          <Item
+            placeholder="cloak"
+            itemRef={items.cloak ? items.cloak : null}
+          />
+          <Item placeholder="ring" itemRef={items.ring ? items.ring : null} />
+          <Item
+            placeholder="necklace"
+            itemRef={items.necklace ? items.necklace : null}
           />
         </div>
       </div>

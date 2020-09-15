@@ -4,9 +4,41 @@
 }
 
 .header__body {
+  display: flex;
+  justify-content: space-between;
   font-weight: bold;
   background-color: black;
   padding: 5px 10px;
+}
+
+.header__title {
+  display: flex;
+  justify-content: center;
+  color: white;
+  width: 33.3%;
+  order: 1;
+}
+
+.header__column {
+  display: flex;
+  width: 33.3%;
+  justify-content: space-around;
+}
+
+.header__column:first-child {
+  order: 0;
+}
+
+.header__column:last-child {
+  order: 2;
+}
+
+.header__level,
+.header__gold,
+.header__silver,
+.header__health,
+.header__energy {
+  display: flex;
 }
 
 .header__xp {

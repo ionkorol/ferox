@@ -21,8 +21,9 @@ const App: React.FC<Props> = (props) => {
   const { userUpdate } = props;
 
   useEffect(() => {
-    userUpdate();
-  }, []);
+    const unsubscribe = userUpdate();
+    return unsubscribe;
+  });
 
   return (
     <Router>

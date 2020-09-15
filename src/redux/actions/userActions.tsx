@@ -70,15 +70,15 @@ export const userSignup = (username: string, password: string) => (
 export const userUpdate = () => (dispatch: Dispatch) => {
   firebaseApp.auth().onAuthStateChanged((user) => {
     if (user) {
-      firestoreApp
+      return firestoreApp
         .collection("users")
-        .doc(user.uid)
-        .get()
-        .then((userSnap) => {
-          dispatch({ type: USER_LOGIN_SUCCESS, payload: userSnap.data() });
-        })
-        .catch((error) =>
-          dispatch({ type: USER_LOGIN_FAILURE, payload: error.message })
+        .doc(firebaseApp.auth().currentUser?.uid)
+        .onSnapshot(
+          (userSnap) => {
+            dispatch({ type: USER_LOGIN_SUCCESS, payload: userSnap.data() });
+          },
+          (error) =>
+            dispatch({ type: USER_LOGIN_FAILURE, payload: error.message })
         );
     } else {
       dispatch({ type: USER_LOGOUT_SUCCESS });

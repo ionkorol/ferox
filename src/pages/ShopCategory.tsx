@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { firestoreApp } from "../utils/firebase";
+
 import Container from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Item from "../components/Item";
-import { firestoreApp } from "../utils/firebase";
 
 import "./ShopCategory.css";
 
@@ -23,33 +24,16 @@ export const ShopCategory: React.FC<Props> = (props) => {
       .get()
       .then((itemsQSnap) => {
         itemsQSnap.forEach((itemSnap) => {
-          setItems((prevState) => [...prevState, itemSnap.data()]);
+          setItems((prevState) => [...prevState, itemSnap.ref]);
         });
       });
-  }, []);
+  }, [match.params.trait]);
 
   return (
     <Container>
       <Header>Shop</Header>
       {items.map((item, index) => (
-        <div className="shop_item__container" key={item.name}>
-          <Item image={item.image} type={item.type} />
-          <div className="shop_item__right">
-            <div className="shop_item__name">{item.name}</div>
-            <div className="shop_item__stats">
-              {Object.entries(item.stats).map(([key, value]) => (
-                <span className="shop_item__stat" key={key}>
-                  +{value} {key}{" "}
-                  <img
-                    src={require(`../assets/${key}.png`)}
-                    height="10"
-                    width="10"
-                  />
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        <Item itemRef={item} detailed buttons={{ buy: true }} key={index} />
       ))}
       <Footer />
     </Container>

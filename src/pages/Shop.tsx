@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Item from "../components/Item";
 import MenuItem from "../components/MenuItem";
-import { firestoreApp } from "../utils/firebase";
 
 import "./Shop.css";
 
