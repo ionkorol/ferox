@@ -12,6 +12,8 @@ import Profile from "./pages/Profile";
 import Shop from "./pages/Shop";
 import ShopCategory from "./pages/ShopCategory";
 import Inventory from "./pages/Inventory";
+import { ToastContainer } from "react-toastify";
+import Arena from "./pages/Arena";
 
 interface Props {
   userUpdate: () => any;
@@ -26,17 +28,21 @@ const App: React.FC<Props> = (props) => {
   });
 
   return (
-    <Router>
-      <Switch>
-        <PrivateRoute exact path="/" component={Main} />
-        <PrivateRoute path="/hero" component={Profile} />
-        <PrivateRoute path="/inventory" component={Inventory} />
-        <PrivateRoute exact path="/shop" component={Shop} />
-        <PrivateRoute exact path="/shop/:trait" component={ShopCategory} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-      </Switch>
-    </Router>
+    <>
+      <ToastContainer />
+      <Router>
+        <Switch>
+          <PrivateRoute exact path="/" component={Main} />
+          <PrivateRoute path="/arena" component={Arena} />
+          <PrivateRoute path="/hero" component={Profile} />
+          <PrivateRoute path="/inventory" component={Inventory} />
+          <PrivateRoute exact path="/shop" component={Shop} />
+          <PrivateRoute exact path="/shop/:trait" component={ShopCategory} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+        </Switch>
+      </Router>
+    </>
   );
 };
 

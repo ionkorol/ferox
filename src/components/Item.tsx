@@ -56,15 +56,10 @@ export const Item: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className={detailed ? "item__detailed_container" : "item__container"}>
+    <div className={detailed ? "card__container" : "item__container"}>
       <div className="item__image">
         {itemData ? (
-          <img
-            src={itemData.image}
-            alt={itemData.type}
-            width="50"
-            height="50"
-          />
+          <img src={itemData.image} alt={itemData.type} />
         ) : (
           <img
             src={require(`../assets/${placeholder}-placeholder.png`)}

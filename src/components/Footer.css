@@ -1,4 +1,6 @@
 .footer__container {
+  display: flex;
+  flex-direction: column;
   border-top: 3px solid gray;
   border-bottom: 3px solid gray;
 }

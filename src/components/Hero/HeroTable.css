@@ -1,0 +1,38 @@
+.hero_table__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero_table__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero_table__column .item__container {
+  margin-bottom: 15px;
+}
+
+.hero_table__row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+
+.hero_table__image {
+  display: flex;
+}
+
+.hero_table__container_small {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero_table__container_small .hero_table__column .item__container {
+  margin: 0;
+}
+
+.hero_table__container_small .item__container .item__image img {
+  width: 20px;
+  height: 20px;
+}

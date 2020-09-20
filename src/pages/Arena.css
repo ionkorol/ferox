@@ -1,0 +1,23 @@
+.arena__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.arena__heroes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 10px;
+  width: 100%;
+  background-image: url(../assets/arena.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.arena__hero {
+  display: flex;
+  flex-direction: column;
+  background-color: #252525;
+  border-radius: 10px;
+}

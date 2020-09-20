@@ -1,0 +1,24 @@
+.hero_stats {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.hero_deliner {
+  height: 2px;
+  background-color: var(--primary);
+}
+
+.hero_stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.hero_stat_text {
+  display: flex;
+  align-items: center;
+}
+
+.hero_stat_points {
+}

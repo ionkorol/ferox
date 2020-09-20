@@ -1,0 +1,61 @@
+.hero_info__container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.hero_info_level__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2px;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  background-color: #252524;
+}
+
+.hero_info_body__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: #252524;
+  padding: 2px;
+  border-radius: 10px;
+}
+
+.hero_info_name__container {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 5px 0px;
+}
+
+.hero_info_health__container,
+.hero_info_mana__container {
+  display: flex;
+  height: 16px;
+  background: linear-gradient(#2f2d2d, #1e1c1a, #2f2d2d);
+  margin: 2px 0px;
+  border-radius: 10px;
+}
+
+.hero_info_health__inner,
+.hero_info_mana__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.hero_info_health__text,
+.hero_info_mana__text {
+  display: flex;
+  font-size: var(--smallFontSize);
+}
+
+.hero_info_health__inner {
+  background: linear-gradient(#822125, #4d1617, #822125);
+}
+.hero_info_mana__inner {
+  background: linear-gradient(#283d7b, #1c2953, #283d7b);
+}

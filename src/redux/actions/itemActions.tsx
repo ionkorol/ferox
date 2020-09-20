@@ -1,5 +1,5 @@
 import { firestore } from "firebase";
-import { toast } from "react-toastify";
+import Toast from "../../components/Toast";
 import { Dispatch } from "redux";
 import { firebaseApp, firestoreApp } from "../../utils/firebase";
 
@@ -45,24 +45,10 @@ export const itemEquip = (itemRef: firestore.DocumentReference) => async (
       inventory,
     });
     dispatch({ type: ITEM_EQUIP_SUCCESS });
-    toast.success("Item Equiped", {
-      position: "bottom-center",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-    });
+    Toast.success("Item Equiped");
   } catch (error) {
     dispatch({ type: ITEM_EQUIP_FAILURE, payload: error.message });
-    toast.error(error.message, {
-      position: "bottom-center",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-    });
+    Toast.error(error.message);
   }
 
   // Remove item from inventory
@@ -77,11 +63,17 @@ export const itemBuy = (
   const userId = firebaseApp.auth().currentUser?.uid;
   const userRef = firestoreApp.collection("users").doc(userId);
   const userData = getState().userReducer.data;
-  await userRef.update({
-    [currency]: firestore.FieldValue.increment(-amount),
-    inventory: [...userData.inventory, itemRef],
-  });
-  dispatch({ type: ITEM_BUY_SUCCESS });
+  try {
+    await userRef.update({
+      [currency]: firestore.FieldValue.increment(-amount),
+      inventory: [...userData.inventory, itemRef],
+    });
+    dispatch({ type: ITEM_BUY_SUCCESS });
+    Toast.success("Item Bought");
+  } catch (error) {
+    dispatch({ type: ITEM_BUY_FAILURE, payload: error.message });
+    Toast.error(error.message);
+  }
 };
 
 export const itemSell = (
@@ -92,11 +84,17 @@ export const itemSell = (
   const userId = firebaseApp.auth().currentUser?.uid;
   const userRef = firestoreApp.collection("users").doc(userId);
   const userData = getState().userReducer.data;
-  await userRef.update({
-    silver: firestore.FieldValue.increment(amount),
-    inventory: userData.inventory.filter(
-      (item: firestore.DocumentReference) => item !== itemRef
-    ),
-  });
-  dispatch({ type: ITEM_SELL_SUCCESS });
+  try {
+    await userRef.update({
+      silver: firestore.FieldValue.increment(amount),
+      inventory: userData.inventory.filter(
+        (item: firestore.DocumentReference) => item !== itemRef
+      ),
+    });
+    dispatch({ type: ITEM_SELL_SUCCESS });
+    Toast.success("Item Sold");
+  } catch (error) {
+    dispatch({ type: ITEM_SELL_FAILURE });
+    Toast.error("Item Bought");
+  }
 };

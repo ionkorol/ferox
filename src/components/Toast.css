@@ -1,0 +1,16 @@
+.Toastify__toast {
+  border-radius: 10px;
+  color: var(--fontPrimary);
+}
+
+.Toastify__toast--success {
+  background-color: var(--secondary);
+}
+
+.Toastify__toast--error {
+  background-color: var(--red);
+}
+
+.Toastify__progress-bar {
+  background-color: var(--fontPrimary);
+}

@@ -23,7 +23,7 @@ const Main: React.FC<Props> = (props) => {
   return (
     <Container>
       <Header>Town Center</Header>
-      <div style={{ padding: "5px" }}>
+      <div>
         <img
           src="http://tiwar.net/images/town/hd/main_h.jpg"
           alt=""

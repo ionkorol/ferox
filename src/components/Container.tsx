@@ -1,5 +1,4 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./Container.css";
@@ -7,12 +6,7 @@ import "./Container.css";
 interface Props {}
 
 const Container: React.FC = (props) => {
-  return (
-    <div className="container">
-      {props.children}
-      <ToastContainer />
-    </div>
-  );
+  return <div className="container">{props.children}</div>;
 };
 
 export default Container;
