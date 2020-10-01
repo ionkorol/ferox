@@ -36,19 +36,6 @@
 .header__level,
 .header__gold,
 .header__silver,
-.header__health,
 .header__energy {
   display: flex;
-}
-
-.header__xp {
-  height: 10px;
-  background-color: #17120f;
-  border: 3px solid #4a372c;
-}
-
-.xp__progress {
-  height: 10px;
-  width: 50%;
-  background-color: var(--secondary);
 }

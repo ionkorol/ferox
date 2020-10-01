@@ -21,6 +21,7 @@ export const Inventory: React.FC<Props> = (props) => {
         (item: firestore.DocumentReference, index: string) => (
           <Item
             itemRef={item}
+            placeholder="ring"
             detailed
             buttons={{ equip: true, sell: true }}
             key={index}

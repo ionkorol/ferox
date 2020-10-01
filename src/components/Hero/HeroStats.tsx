@@ -5,66 +5,71 @@ import "./HeroStats.css";
 
 interface Props {
   stats: any;
+  powerOnly?: boolean;
 }
 
 const HeroStats: React.FC<Props> = (props) => {
-  const { stats } = props;
+  const { stats, powerOnly } = props;
 
   return (
     <div className="hero_stats">
+      {!powerOnly ? (
+        <>
+          <div className="hero_stat">
+            <div className="hero_stat_icon">
+              <img
+                src={require("../../assets/strength.png")}
+                height="15"
+                width="15"
+                alt="strength"
+              />
+            </div>
+            <span className="hero_stat_text">Strength</span>
+            <span className="hero_stat_points" style={{ color: Colors.red }}>
+              {stats.strength}
+            </span>
+          </div>
+          <div className="hero_stat">
+            <div className="hero_stat_icon">
+              <img
+                src={require("../../assets/intelligence.png")}
+                height="15"
+                width="15"
+                alt="intelligence"
+              />
+            </div>
+            <span className="hero_stat_text">Intelligence</span>
+            <span className="hero_stat_points" style={{ color: Colors.blue }}>
+              {stats.intelligence}
+            </span>
+          </div>
+          <div className="hero_stat">
+            <div className="hero_stat_icon">
+              <img
+                src={require("../../assets/agility.png")}
+                height="15"
+                width="15"
+                alt="agility"
+              />
+            </div>
+            <span className="hero_stat_text">Agility</span>
+            <span className="hero_stat_points" style={{ color: Colors.green }}>
+              {stats.agility}
+            </span>
+          </div>
+          <div className="hero_deliner" />
+        </>
+      ) : null}
       <div className="hero_stat">
-        <span className="hero_stat_text">
-          <img
-            src={require("../../assets/strength.png")}
-            height="20"
-            width="20"
-            alt="strength"
-          />
-          Strength
-        </span>
-        <span className="hero_stat_points" style={{ color: Colors.red }}>
-          {stats.strength}
-        </span>
-      </div>
-      <div className="hero_stat">
-        <span className="hero_stat_text">
-          <img
-            src={require("../../assets/intelligence.png")}
-            height="20"
-            width="20"
-            alt="intelligence"
-          />
-          Intelligence
-        </span>
-        <span className="hero_stat_points" style={{ color: Colors.blue }}>
-          {stats.intelligence}
-        </span>
-      </div>
-      <div className="hero_stat">
-        <span className="hero_stat_text">
-          <img
-            src={require("../../assets/agility.png")}
-            height="20"
-            width="20"
-            alt="agility"
-          />
-          Agility
-        </span>
-        <span className="hero_stat_points" style={{ color: Colors.green }}>
-          {stats.agility}
-        </span>
-      </div>
-      <div className="hero_deliner" />
-      <div className="hero_stat">
-        <span className="hero_stat_text">
+        <div className="hero_stat_icon">
           <img
             src={require("../../assets/power.png")}
-            height="20"
-            width="20"
+            height="15"
+            width="15"
             alt="Power"
           />
-          Power
-        </span>
+        </div>
+        <span className="hero_stat_text">Power</span>
         <span className="hero_stat_points" style={{ color: "#B57204" }}>
           {stats.agility + stats.intelligence + stats.strength}
         </span>

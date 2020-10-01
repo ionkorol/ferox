@@ -55,7 +55,38 @@ export const userSignup = (username: string, password: string) => (
         .collection("users")
         .doc(userCred.user?.uid)
         .set({
-          username,
+          username: username,
+          level: 1,
+          xp: 0,
+          health: 1000,
+          maxHealth: 1000,
+          maxEnergy: 10,
+          maxMana: 1000,
+          energy: 10,
+          gold: 10,
+          silver: 100,
+          guild: null,
+          inventory: [],
+          items: {
+            chest: null,
+            cloak: null,
+            gloves: null,
+            head: null,
+            necklace: null,
+            pants: null,
+            ring: null,
+            shield: null,
+            shoes: null,
+            shoulder: null,
+            sword: null,
+          },
+          power: 15,
+          stats: {
+            agility: 5,
+            intelligence: 5,
+            strength: 5,
+          },
+          uid: userCred.user?.uid,
         })
         .then((user) => dispatch({ type: USER_SIGNUP_SUCCESS, payload: user }))
         .catch((error) =>

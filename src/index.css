@@ -4,7 +4,7 @@
   --red: #d0021b;
   --green: #417505;
   --blue: #4a90e2;
-  --fontPrimary: wheat;
+  --fontPrimary: #aa8759;
   --regularFontSize: 15px;
   --smallFontSize: 10px;
 }
@@ -15,11 +15,7 @@ body {
   font-size: var(--regularFontSize);
   background-color: #303030;
   color: var(--fontPrimary);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  
 }
 
 #root {

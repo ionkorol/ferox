@@ -1,6 +1,9 @@
 import { firestore } from "firebase";
 import React, { useEffect, useState } from "react";
 import { connect, RootStateOrAny } from "react-redux";
+
+import * as arenaActions from "../redux/actions/arenaActions";
+
 import Button from "../components/Button";
 import Card from "../components/Card";
 import Container from "../components/Container";
@@ -17,19 +20,23 @@ import { UserObject, UserProp } from "../utils/UserObject";
 import { getRandomInt } from "../utils/UtilityFunctions";
 
 import "./Arena.css";
+import { handleRewards } from "../hooks/Rewards";
 
 interface Props {
   userData: UserProp;
+  arenaReward: (xp: number) => any;
 }
 
 export const Arena: React.FC<Props> = (props) => {
-  const { userData } = props;
+  const { userData, arenaReward } = props;
   const [oppData, setOppData] = useState(UserObject);
   const [oppHealth, setOppHealth] = useState(oppData.maxHealth);
-  const [oppEnergy, setOppEnergy] = useState(oppData.maxEnergy);
+  const [oppMana, setOppMana] = useState(oppData.maxMana);
   const [userHealth, setUserHealth] = useState(userData.maxHealth);
-  const [userEnergy, setUserEnergy] = useState(userData.maxEnergy);
-  const [attackDelay, resetCooldown] = useCooldown(5);
+  const [userMana, setUserMana] = useState(userData.maxMana);
+  const [attackDelay, resetCooldown] = useCooldown(1);
+  const [userAttack, setUserAttack] = useState<number>();
+  const [oppAttack, setOppAttack] = useState<number>();
 
   const userPower =
     userData.stats.agility +
@@ -63,26 +70,16 @@ export const Arena: React.FC<Props> = (props) => {
     }
     setOppHealth((prevState) => prevState - userPower);
     setUserHealth((prevState) => prevState - oppPower);
+    setOppAttack(getRandomInt(oppPower - 10, oppPower + 10));
+    setUserAttack(getRandomInt(userPower - 10, userPower + 10));
     resetCooldown();
   };
 
   const handleResult = () => {
-    const userRef = firestoreApp
-      .collection("users")
-      .doc(firebaseApp.auth().currentUser?.uid);
     if (oppHealth <= userHealth) {
-      userRef.update({
-        energy: firestore.FieldValue.increment(-50),
-        xp: firestore.FieldValue.increment(50),
-      });
-      Toast.success("Won");
+      handleRewards("win");
     } else {
-      userRef.update({
-        energy: firestore.FieldValue.increment(-50),
-        health: firestore.FieldValue.increment(-100),
-        xp: firestore.FieldValue.increment(25),
-      });
-      Toast.error("Lost");
+      handleRewards("loss");
     }
   };
 
@@ -98,47 +95,54 @@ export const Arena: React.FC<Props> = (props) => {
       <Header>Arena</Header>
       <div className="arena__container">
         <div className="arena__heroes">
-          <Card style={{ flexDirection: "column", padding: "5px" }}>
+          <Card className="arena__hero">
             <HeroInfo
               userData={userData}
               currentHealth={userHealth}
-              currentMana={userEnergy}
+              currentMana={userMana}
             />
             <HeroTable items={userData.items} small />
-            <HeroStats stats={userData.stats} />
+            <HeroStats stats={userData.stats} powerOnly />
           </Card>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <Button onClick={handleAttack} small>
-              {attackDelay ? (
-                attackDelay
-              ) : (
+          <div className="arena__logs">
+            {userAttack ? (
+              <div className="arena__logs_user">
                 <img
                   src={require("../assets/power.png")}
-                  width="13"
-                  height="13"
+                  height="20"
+                  width="20"
                   alt=""
                 />
-              )}
-            </Button>
-            <Button onClick={handleNext} small>
-              Re
-            </Button>
+                {userAttack}
+              </div>
+            ) : null}
+            {oppAttack ? (
+              <div className="arena__logs_opp">
+                {oppAttack}
+                <img
+                  src={require("../assets/power.png")}
+                  height="20"
+                  width="20"
+                  alt=""
+                />
+              </div>
+            ) : null}
           </div>
-          <Card style={{ flexDirection: "column", padding: "5px" }}>
+          <Card className="arena__hero">
             <HeroInfo
               userData={oppData}
               currentHealth={oppHealth}
-              currentMana={oppEnergy}
+              currentMana={oppMana}
             />
             <HeroTable items={oppData.items} small />
-            <HeroStats stats={oppData.stats} />
+            <HeroStats stats={oppData.stats} powerOnly />
           </Card>
+        </div>
+        <div className="arena__controls">
+          <Button onClick={handleAttack} icon={require("../assets/power.png")}>
+            {attackDelay ? `${attackDelay} Seconds` : "Attack"}
+          </Button>
+          <Button onClick={handleNext}>Refresh</Button>
         </div>
       </div>
       <Footer />
@@ -150,4 +154,8 @@ const mapState = (state: RootStateOrAny) => ({
   userData: state.userReducer.data,
 });
 
-export default connect(mapState)(Arena);
+const mapDispatch = {
+  arenaReward: arenaActions.arenaReward,
+};
+
+export default connect(mapState, mapDispatch)(Arena);

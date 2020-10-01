@@ -1,0 +1,44 @@
+.guild__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.guild__info {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.guild__right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.guild__image {
+  margin-right: 10px;
+}
+
+.guild__level {
+  display: flex;
+}
+
+.guild__xp {
+  width: 50%;
+}
+
+.guild__members {
+  display: flex;
+  flex-direction: column;
+}
+
+.guild__member {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  border-bottom: 1px dashed gray;
+}
+
+.guild__member:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}

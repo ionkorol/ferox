@@ -17,7 +17,6 @@ const useCooldown = (cooldownTime: number) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       calculateTimeLeft();
-      console.log(cooldown);
     }, 1000);
 
     return () => clearTimeout(timer);

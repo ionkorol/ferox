@@ -35,6 +35,7 @@ const userReducer = (
     case USER_LOGIN_SUCCESS:
     case USER_SIGNUP_SUCCESS:
       return {
+        ...state,
         loading: false,
         error: null,
         data: action.payload,

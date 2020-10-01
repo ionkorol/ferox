@@ -11,14 +11,24 @@
 
 .hero_stat {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  align-items: center;
   margin-bottom: 5px;
+}
+
+.hero_stat_icon {
+  display: flex;
+  margin-right: 5px
 }
 
 .hero_stat_text {
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .hero_stat_points {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
 }

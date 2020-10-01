@@ -14,6 +14,8 @@ import ShopCategory from "./pages/ShopCategory";
 import Inventory from "./pages/Inventory";
 import { ToastContainer } from "react-toastify";
 import Arena from "./pages/Arena";
+import Guild from "./pages/Guild";
+import GuildChat from "./components/Chat";
 
 interface Props {
   userUpdate: () => any;
@@ -38,6 +40,9 @@ const App: React.FC<Props> = (props) => {
           <PrivateRoute path="/inventory" component={Inventory} />
           <PrivateRoute exact path="/shop" component={Shop} />
           <PrivateRoute exact path="/shop/:trait" component={ShopCategory} />
+          <PrivateRoute path="/chat/guild" component={GuildChat} />
+          <PrivateRoute exact path="/guild" component={Guild} />
+          <PrivateRoute exact path="/guild" component={Guild} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>

@@ -1,7 +1,7 @@
 import {
-  ARENA_CREATE_REQUEST,
-  ARENA_CREATE_SUCCESS,
-  ARENA_CREATE_FAILURE,
+  ARENA_REWARD_REQUEST,
+  ARENA_REWARD_SUCCESS,
+  ARENA_REWARD_FAILURE,
 } from "../actions/types";
 
 const initialState = {
@@ -15,14 +15,14 @@ const arenaReducer = (
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case ARENA_CREATE_REQUEST:
+    case ARENA_REWARD_REQUEST:
       return {
         ...state,
         loading: false,
         error: null,
       };
 
-    case ARENA_CREATE_SUCCESS:
+    case ARENA_REWARD_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -30,7 +30,7 @@ const arenaReducer = (
         data: action.payload,
       };
 
-    case ARENA_CREATE_FAILURE:
+    case ARENA_REWARD_FAILURE:
       return {
         ...state,
         loading: false,

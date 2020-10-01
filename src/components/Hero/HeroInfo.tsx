@@ -12,14 +12,13 @@ interface Props {
 const HeroInfo: React.FC<Props> = (props) => {
   const { userData, currentHealth, currentMana } = props;
   const healthPercent = Math.round((currentHealth / userData.maxHealth) * 100);
-  const manaPercent = Math.round((currentMana / userData.maxEnergy) * 100);
+  const manaPercent = Math.round((currentMana / userData.maxMana) * 100);
 
   return (
     <div className="hero_info__container">
       <div className="hero_info_body__container">
         <div className="hero_info_name__container">
-          <div className="hero_info_level__container">{userData.level}</div>
-          {userData.username}
+          <img src={require(`../../assets/icons/class/${userData.class}.png`)} width="15" height="15" alt={userData.class} />{userData.username}
         </div>
 
         <div className="hero_info_health__container">

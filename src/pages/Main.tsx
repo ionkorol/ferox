@@ -25,7 +25,7 @@ const Main: React.FC<Props> = (props) => {
       <Header>Town Center</Header>
       <div>
         <img
-          src="http://tiwar.net/images/town/hd/main_h.jpg"
+          src={require('../assets/bg.jpg')}
           alt=""
           width="100%"
         />

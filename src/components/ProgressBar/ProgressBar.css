@@ -1,0 +1,11 @@
+.progressbar__container {
+    height: 10px;
+    background-color: #17120f;
+    border: 3px solid #4a372c;
+  }
+  
+  .progressbar__body {
+    height: 10px;
+    background-color: var(--secondary);
+  }
+  

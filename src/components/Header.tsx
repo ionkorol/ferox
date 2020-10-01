@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect, RootStateOrAny } from "react-redux";
+import { firestoreApp } from "../utils/firebase";
+import { UserProp } from "../utils/UserObject";
+import ProgressBar from "./ProgressBar";
+
 import "./Header.css";
 
 interface Props {
-  userData: any;
+  userData: UserProp;
 }
 
 export const Header: React.FC<Props> = (props) => {
   const { userData } = props;
+  const [xpWidth, setXpWidth] = useState(0);
+
+  const calculateWidth = async () => {
+    const currentLevelSnap = await firestoreApp
+      .collection("levels")
+      .doc(`${userData.level}`)
+      .get();
+    const nextLevelSnap = await firestoreApp
+      .collection("levels")
+      .doc(`${userData.level + 1}`)
+      .get();
+    const nextLvlXpReq = nextLevelSnap.get("xp");
+    const currentLvlReq = currentLevelSnap.get("xp");
+
+    return (
+      ((userData.xp - currentLvlReq) / (nextLvlXpReq - currentLvlReq)) * 100
+    );
+  };
+
+  useEffect(() => {
+    if (userData) {
+      calculateWidth().then((width) => {
+        setXpWidth(width);
+      });
+    }
+  }, [userData, calculateWidth]);
 
   return (
     <div className="header__container">
@@ -45,34 +75,20 @@ export const Header: React.FC<Props> = (props) => {
                   alt="level"
                 />
               </div>
-
-              <div className="header__health">
-                {userData.health}
-                <img
-                  src={require("../assets/icons/health.png")}
-                  height="18"
-                  width="18"
-                  alt="silver"
-                />
-              </div>
               <div className="header__energy">
                 {userData.energy}
                 <img
                   src={require("../assets/icons/energy.png")}
                   height="18"
                   width="18"
-                  alt="silver"
+                  alt="energy"
                 />
               </div>
             </div>
           </>
         ) : null}
       </div>
-      {userData ? (
-        <div className="header__xp">
-          <div className="xp__progress" />
-        </div>
-      ) : null}
+      {userData ? <ProgressBar percentWidth={xpWidth} /> : null}
     </div>
   );
 };

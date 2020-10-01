@@ -4,13 +4,14 @@ import "./Card.css";
 
 interface Props {
   style?: CSSProperties;
+  className?: string
 }
 
 const Card: React.FC<Props> = (props) => {
-  const { style } = props;
+  const { style, className } = props;
 
   return (
-    <div className="card__container" style={style}>
+    <div className={`card__container ${className ? className : null}`} style={style}>
       {props.children}
     </div>
   );

@@ -51,10 +51,6 @@ export const Item: React.FC<Props> = (props) => {
     }
   }, [itemRef]);
 
-  if (loading) {
-    return <div>Loading</div>;
-  }
-
   return (
     <div className={detailed ? "card__container" : "item__container"}>
       <div className="item__image">

@@ -24,7 +24,12 @@ export const Profile: React.FC<Props> = (props) => {
         <div className="profile__info_left">
           <div className="profile__level">{userData.level}</div>
           <div className="profile__username_team">
-            <div className="profile__username">{userData.username}</div>
+            <div className="profile__username">
+              <img
+                src={require(`../assets/icons/class/${userData.class}.png`)} width="15" height="15" alt={userData.class}
+              />
+              {userData.username}
+            </div>
             <div className="profile__team">Guild</div>
           </div>
         </div>
