@@ -11,6 +11,10 @@ interface Props {
 const HeroTable: React.FC<Props> = (props) => {
   const { items, small } = props;
 
+  if (!items) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div
       className={

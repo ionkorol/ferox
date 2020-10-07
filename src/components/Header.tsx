@@ -10,11 +10,47 @@ interface Props {
   userData: UserProp;
 }
 
-export const Header: React.FC<Props> = (props) => {
+const Header: React.FC<Props> = (props) => {
   const { userData } = props;
   const [xpWidth, setXpWidth] = useState(0);
 
+  // TODO: Add energy time
+  const energyTimeLeft =
+    userData && userData.energy.timestamp
+      ? new Date().getTime() - userData.energy.timestamp.seconds
+      : 0;
+  const [energyTime, setEnergyTime] = useState(energyTimeLeft);
+
+  const fancyTimeFormat = (duration: number) => {
+    // Hours, minutes and seconds
+    var hrs = ~~(duration / 3600);
+    var mins = ~~((duration % 3600) / 60);
+    var secs = ~~duration % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+      ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    console.log(ret)
+    return ret;
+  };
+
+  const energyTimer = () => {
+    setTimeout(() => {
+      setEnergyTime((prevState) => prevState - 1);
+    }, 1000);
+  };
+  // END TODO
+
   const calculateWidth = async () => {
+    if (!userData) {
+      return 0
+    }
     const currentLevelSnap = await firestoreApp
       .collection("levels")
       .doc(`${userData.level}`)
@@ -37,7 +73,11 @@ export const Header: React.FC<Props> = (props) => {
         setXpWidth(width);
       });
     }
-  }, [userData, calculateWidth]);
+  }, [userData]);
+
+  if (!userData) {
+    return <div className="header__container">Loading...</div>
+  }
 
   return (
     <div className="header__container">
@@ -76,7 +116,7 @@ export const Header: React.FC<Props> = (props) => {
                 />
               </div>
               <div className="header__energy">
-                {userData.energy}
+                {userData.energy.current}
                 <img
                   src={require("../assets/icons/energy.png")}
                   height="18"

@@ -34,7 +34,7 @@ export const Profile: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className="profile__info_right">
-          <div>Power: {userData.power}</div>
+          <div>Power: {userData.energy.timestamp.seconds}</div>
         </div>
       </div>
       <Card style={{ justifyContent: "center" }}>

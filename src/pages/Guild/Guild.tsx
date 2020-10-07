@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import Container from "../../components/Container";
 import Footer from "../../components/Footer";
-import { Header } from "../../components/Header";
+import Header from "../../components/Header";
 import MenuItem from "../../components/MenuItem";
 import ProgressBar from "../../components/ProgressBar";
 import { firestoreApp } from "../../utils/firebase";
@@ -113,8 +113,15 @@ const Guild: React.FC<Props> = (props) => {
         <MenuItem href="/chat/guild" icon="chat">
           Chat
         </MenuItem>
-        <Card style={{flexDirection: 'column'}}>
-          <div style={{ display: 'flex', borderBottom: "1px dashed gray", justifyContent: 'center', paddingBottom: '10px' }}>
+        <Card style={{ flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              borderBottom: "1px dashed gray",
+              justifyContent: "center",
+              paddingBottom: "10px",
+            }}
+          >
             There are {guildData.members.length} guild members
           </div>
           <div className="guild__members">
@@ -134,7 +141,7 @@ const Guild: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <Header userData={userData} />
+      <Header />
       {content}
       <Footer />
     </Container>
@@ -176,9 +183,7 @@ const GuildMember: React.FC<GMProps> = (props) => {
           height="15"
           alt={data.class}
         />
-        {data.username}
-    {" "}-{" "}
-        {data.guild_xp} xp
+        {data.username} - {data.guild_xp} xp
       </>
     );
   } else {

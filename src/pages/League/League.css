@@ -1,0 +1,31 @@
+.league__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.league__opponent {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0px;
+  border-top: 1px dashed gray;
+}
+
+.league__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.league__right .hero_stats .hero_stat {
+  margin-bottom: 0;
+}
+
+.league__right .button__container {
+  width: auto;
+}
+
+.league__right .button__container .button__body {
+  width: 100%;
+}

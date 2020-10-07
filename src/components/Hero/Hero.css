@@ -1,0 +1,8 @@
+.hero__container {
+  flex-direction: column;
+  padding: 3px;
+}
+
+.hero__container > div {
+  margin: 2px 0px;
+}

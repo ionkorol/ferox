@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useCooldown = (cooldownTime: number) => {
   const [cooldown, setCooldown] = useState(cooldownTime);
@@ -7,16 +7,12 @@ const useCooldown = (cooldownTime: number) => {
     setCooldown(cooldownTime);
   };
 
-  const calculateTimeLeft = () => {
-    if (cooldown === 0) {
-      return;
-    }
-    setCooldown((prevState) => prevState - 1);
-  };
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      calculateTimeLeft();
+      if (cooldown === 0) {
+        return;
+      }
+      setCooldown((prevState) => prevState - 1);
     }, 1000);
 
     return () => clearTimeout(timer);

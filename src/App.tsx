@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import Arena from "./pages/Arena";
 import Guild from "./pages/Guild";
 import GuildChat from "./components/Chat";
+import League from "./pages/League";
 
 interface Props {
   userUpdate: () => any;
@@ -36,6 +37,7 @@ const App: React.FC<Props> = (props) => {
         <Switch>
           <PrivateRoute exact path="/" component={Main} />
           <PrivateRoute path="/arena" component={Arena} />
+          <PrivateRoute path="/league" component={League} />
           <PrivateRoute path="/hero" component={Profile} />
           <PrivateRoute path="/inventory" component={Inventory} />
           <PrivateRoute exact path="/shop" component={Shop} />

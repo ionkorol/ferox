@@ -11,6 +11,10 @@ interface Props {
 const HeroStats: React.FC<Props> = (props) => {
   const { stats, powerOnly } = props;
 
+  if (!stats) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="hero_stats">
       {!powerOnly ? (

@@ -1,14 +1,13 @@
 import { firestore } from "firebase";
 import React, { useEffect, useState } from "react";
 import { RootStateOrAny, connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { firestoreApp } from "../../utils/firebase";
 import { UserProp } from "../../utils/UserObject";
 import Button from "../Button";
 import Card from "../Card";
 import Container from "../Container";
 import Footer from "../Footer";
-import { Header } from "../Header";
+import Header from "../Header";
 
 import "./GuildChat.css";
 
@@ -52,7 +51,7 @@ const GuildChat: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <Header userData={userData}>Guild Chat</Header>
+      <Header>Guild Chat</Header>
       <div className="gchat__container">
         <Card className="gchat__input">
           <input
@@ -64,7 +63,13 @@ const GuildChat: React.FC<Props> = (props) => {
         </Card>
         <Card className="gchat__output">
           {messages.map((message) => (
-            <div key={message.timestamp}>
+            <div className="gchat__message" key={message.timestamp}>
+              <img
+                src={require(`../../assets/icons/class/${message.user.class}.png`)}
+                width="15"
+                height="15"
+                alt={message.user.class}
+              />
               {message.user.username}: {message.content}
             </div>
           ))}

@@ -7,14 +7,22 @@ export interface UserProp {
   xp: number;
   health: number;
   maxHealth: number;
-  maxEnergy: number;
   maxMana: number;
-  energy: number;
+  energy: {
+    current: number;
+    max: number;
+    timestamp: firebase.firestore.Timestamp | null;
+    task: string;
+  };
   gold: number;
   silver: number;
-  guild: firestore.DocumentReference | null;
+  guild: firebase.firestore.DocumentReference | null;
   guild_xp: number;
-  inventory: firestore.DocumentReference[];
+  league: {
+    rank: number;
+    tier: "bronze" | "silver" | "gold" | string;
+  };
+  inventory: firebase.firestore.DocumentReference[];
   items: any;
   power: number;
   stats: {
@@ -30,15 +38,23 @@ export const UserObject = {
   class: "warrior",
   level: 12,
   xp: 0,
-  health: 1000,
-  maxHealth: 1111,
-  maxEnergy: 1111,
-  maxMana: 1111,
-  energy: 1000,
+  health: 100,
+  maxHealth: 100,
+  maxMana: 100,
+  energy: {
+    current: 10,
+    max: 10,
+    timestamp: null,
+    task: "",
+  },
   gold: 0,
   silver: 0,
   guild: null,
   guild_xp: 0,
+  league: {
+    rank: 100,
+    tier: "bronze",
+  },
   inventory: [],
   items: {
     chest: null,
@@ -59,5 +75,5 @@ export const UserObject = {
     intelligence: 50,
     strength: 50,
   },
-  uid: 'test-uid'
+  uid: "test-uid",
 };

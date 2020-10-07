@@ -11,7 +11,7 @@ const Card: React.FC<Props> = (props) => {
   const { style, className } = props;
 
   return (
-    <div className={`card__container ${className ? className : null}`} style={style}>
+    <div className={`card__container ${className ? className : ""}`} style={style}>
       {props.children}
     </div>
   );
