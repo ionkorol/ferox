@@ -34,7 +34,6 @@ export const Item: React.FC<Props> = (props) => {
   } = props;
 
   const [itemData, setItemData] = useState<firestore.DocumentData>();
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (itemRef) {
@@ -43,11 +42,6 @@ export const Item: React.FC<Props> = (props) => {
         .then((itemSnap) => {
           setItemData(itemSnap.data());
         })
-        .then(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
     }
   }, [itemRef]);
 

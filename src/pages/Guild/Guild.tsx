@@ -9,7 +9,7 @@ import Header from "../../components/Header";
 import MenuItem from "../../components/MenuItem";
 import ProgressBar from "../../components/ProgressBar";
 import { firestoreApp } from "../../utils/firebase";
-import { UserProp } from "../../utils/UserObject";
+import { UserProp } from "../../utils/interfaces";
 
 import "./Guild.css";
 
@@ -61,7 +61,7 @@ const Guild: React.FC<Props> = (props) => {
           });
         });
     }
-  }, []);
+  }, [userData.guild]);
 
   useEffect(() => {
     if (userData.guild) {
@@ -165,15 +165,13 @@ const GuildMember: React.FC<GMProps> = (props) => {
 
   console.log(memberRef);
 
-  const getMemberData = () => {
+  // Get member data
+  useEffect(() => {
     memberRef.get().then((snap: any) => {
       setData(snap.data());
     });
-  };
+  }, [memberRef]);
 
-  useEffect(() => {
-    getMemberData();
-  }, []);
   if (data) {
     return (
       <>

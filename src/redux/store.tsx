@@ -3,9 +3,15 @@ import ReduxTunk from "redux-thunk";
 
 import userReducer from "./reducers/userReducer";
 import itemReducer from "./reducers/itemReducer";
-import arenaReducer from "./reducers/arenaReducer";
+import battleReducer from "./reducers/battleReducer";
+import leagueReducer from "./reducers/leagueReducer";
 
-const rootReducer = combineReducers({ userReducer, itemReducer, arenaReducer });
+const rootReducer = combineReducers({
+  userReducer,
+  itemReducer,
+  battleReducer,
+  leagueReducer,
+});
 
 const store = createStore(rootReducer, applyMiddleware(ReduxTunk));
 

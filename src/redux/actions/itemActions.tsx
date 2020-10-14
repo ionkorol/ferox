@@ -63,6 +63,13 @@ export const itemBuy = (
   const userId = firebaseApp.auth().currentUser?.uid;
   const userRef = firestoreApp.collection("users").doc(userId);
   const userData = getState().userReducer.data;
+
+  if (userData[currency] < amount) {
+    dispatch({type: ITEM_BUY_FAILURE, payload: 'Not enough money'})
+    Toast.error('Not enough funds')
+    return null;
+  }
+
   try {
     await userRef.update({
       [currency]: firestore.FieldValue.increment(-amount),
@@ -95,6 +102,6 @@ export const itemSell = (
     Toast.success("Item Sold");
   } catch (error) {
     dispatch({ type: ITEM_SELL_FAILURE });
-    Toast.error("Item Bought");
+    Toast.error(error);
   }
 };

@@ -17,6 +17,8 @@ import Arena from "./pages/Arena";
 import Guild from "./pages/Guild";
 import GuildChat from "./components/Chat";
 import League from "./pages/League";
+import Battle from "./components/Battle";
+import { Rating } from "./pages/Rating";
 
 interface Props {
   userUpdate: () => any;
@@ -36,9 +38,11 @@ const App: React.FC<Props> = (props) => {
       <Router>
         <Switch>
           <PrivateRoute exact path="/" component={Main} />
+          <PrivateRoute path="/battle" component={Battle} />
           <PrivateRoute path="/arena" component={Arena} />
           <PrivateRoute path="/league" component={League} />
           <PrivateRoute path="/hero" component={Profile} />
+          <PrivateRoute path="/rating" component={Rating} />
           <PrivateRoute path="/inventory" component={Inventory} />
           <PrivateRoute exact path="/shop" component={Shop} />
           <PrivateRoute exact path="/shop/:trait" component={ShopCategory} />

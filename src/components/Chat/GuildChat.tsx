@@ -2,7 +2,7 @@ import { firestore } from "firebase";
 import React, { useEffect, useState } from "react";
 import { RootStateOrAny, connect } from "react-redux";
 import { firestoreApp } from "../../utils/firebase";
-import { UserProp } from "../../utils/UserObject";
+import { UserProp } from "../../utils/interfaces";
 import Button from "../Button";
 import Card from "../Card";
 import Container from "../Container";
@@ -19,7 +19,6 @@ const GuildChat: React.FC<Props> = (props) => {
   const { userData } = props;
   const [msg, setMsg] = useState<string>("");
   const [messages, setMessages] = useState<any[]>([]);
-  let content;
 
   const sendMessage = async (msg: string) => {
     await userData.guild?.collection("chat").add({
@@ -47,7 +46,7 @@ const GuildChat: React.FC<Props> = (props) => {
 
       return () => unsubscribe();
     }
-  }, []);
+  }, [userData.guild]);
 
   return (
     <Container>

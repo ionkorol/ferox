@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect, RootStateOrAny } from "react-redux";
 import { firestoreApp } from "../utils/firebase";
-import { UserProp } from "../utils/UserObject";
+import { UserProp } from "../utils/interfaces";
 import ProgressBar from "./ProgressBar";
 
 import "./Header.css";
@@ -15,36 +15,36 @@ const Header: React.FC<Props> = (props) => {
   const [xpWidth, setXpWidth] = useState(0);
 
   // TODO: Add energy time
-  const energyTimeLeft =
-    userData && userData.energy.timestamp
-      ? new Date().getTime() - userData.energy.timestamp.seconds
-      : 0;
-  const [energyTime, setEnergyTime] = useState(energyTimeLeft);
+  // const energyTimeLeft =
+  //   userData && userData.energy.timestamp
+  //     ? new Date().getTime() - userData.energy.timestamp.seconds
+  //     : 0;
+  // const [energyTime, setEnergyTime] = useState(energyTimeLeft);
 
-  const fancyTimeFormat = (duration: number) => {
-    // Hours, minutes and seconds
-    var hrs = ~~(duration / 3600);
-    var mins = ~~((duration % 3600) / 60);
-    var secs = ~~duration % 60;
+  // const fancyTimeFormat = (duration: number) => {
+  //   // Hours, minutes and seconds
+  //   var hrs = ~~(duration / 3600);
+  //   var mins = ~~((duration % 3600) / 60);
+  //   var secs = ~~duration % 60;
 
-    // Output like "1:01" or "4:03:59" or "123:03:59"
-    var ret = "";
+  //   // Output like "1:01" or "4:03:59" or "123:03:59"
+  //   var ret = "";
 
-    if (hrs > 0) {
-      ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
+  //   if (hrs > 0) {
+  //     ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+  //   }
 
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-    ret += "" + secs;
-    console.log(ret)
-    return ret;
-  };
+  //   ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+  //   ret += "" + secs;
+  //   console.log(ret)
+  //   return ret;
+  // };
 
-  const energyTimer = () => {
-    setTimeout(() => {
-      setEnergyTime((prevState) => prevState - 1);
-    }, 1000);
-  };
+  // const energyTimer = () => {
+  //   setTimeout(() => {
+  //     setEnergyTime((prevState) => prevState - 1);
+  //   }, 1000);
+  // };
   // END TODO
 
   const calculateWidth = async () => {

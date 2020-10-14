@@ -1,7 +1,10 @@
 import {
-  ARENA_REWARD_REQUEST,
-  ARENA_REWARD_SUCCESS,
-  ARENA_REWARD_FAILURE,
+  LEAGUE_GET_OPPONENT_REQUEST,
+  LEAGUE_GET_OPPONENT_SUCCESS,
+  LEAGUE_GET_OPPONENT_FAILURE,
+  LEAGUE_HANDLE_WIN_REQUEST,
+  LEAGUE_HANDLE_WIN_SUCCESS,
+  LEAGUE_HANDLE_WIN_FAILURE,
 } from "../actions/types";
 
 const initialState = {
@@ -10,19 +13,19 @@ const initialState = {
   data: null,
 };
 
-const arenaReducer = (
+const leagueReducer = (
   state = initialState,
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case ARENA_REWARD_REQUEST:
+    case LEAGUE_GET_OPPONENT_REQUEST:
       return {
         ...state,
-        loading: false,
+        loading: true,
         error: null,
       };
 
-    case ARENA_REWARD_SUCCESS:
+    case LEAGUE_GET_OPPONENT_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -30,11 +33,18 @@ const arenaReducer = (
         data: action.payload,
       };
 
-    case ARENA_REWARD_FAILURE:
+    case LEAGUE_GET_OPPONENT_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case LEAGUE_HANDLE_WIN_REQUEST:
+    case LEAGUE_HANDLE_WIN_SUCCESS:
+    case LEAGUE_HANDLE_WIN_FAILURE:
+      return {
+        ...state,
       };
 
     default:
@@ -42,4 +52,4 @@ const arenaReducer = (
   }
 };
 
-export default arenaReducer;
+export default leagueReducer;

@@ -1,0 +1,26 @@
+.rating__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating__controlers {
+  display: flex;
+  flex-direction: row;
+}
+
+.rating__users {
+  flex-direction: column;
+  padding: 10px;
+}
+
+.rating__user {
+  display: flex;
+  flex-direction: column; 
+  padding: 5px 0px;
+  border-bottom: 1px dashed gray;
+}
+
+.rating__user:hover {
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.125);
+}

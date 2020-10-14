@@ -7,13 +7,15 @@ interface Props {
   onClick?: any;
   href?: string;
   small?: boolean;
+  active?: boolean;
+  inactive?: boolean;
 }
 
 export const Button: React.FC<Props> = (props) => {
-  const { href, onClick, icon, small } = props;
+  const { href, onClick, icon, small, active, inactive } = props;
 
   return (
-    <div className="button__container" onClick={onClick}>
+    <div className={`button__container${active ? " button__active" : ""}${inactive ? " button__inactive" : ""}`} onClick={onClick}>
       <Link to={href || "#"} className={`button__body ${small ? "small" : ""}`}>
         {icon ? (
           <div className="button__icon">

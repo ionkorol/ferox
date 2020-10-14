@@ -7,9 +7,26 @@
   box-shadow: 0px 2px 0px 0px rgba(15, 9, 2, 0.7);
 }
 
+.button__active .button__body {
+  background-color: rgba(255, 166, 0, 0.1);
+  color: white;
+}
+
+.button__inactive .button__body {
+  background-color: rgba(78, 78, 78, 0.1);
+  color: gray;
+}
+
+.button__inactive .button__body:hover {
+  cursor: default;
+  background-color:rgba(78, 78, 78, 0.1);
+  color: gray;
+}
+
 .button__body {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 7px 15px;
   border-radius: 5px;
   filter: drop-shadow(0px 3px 0.5px rgba(0, 0, 0, 0.25));
@@ -29,7 +46,7 @@
 .button__body:hover {
   cursor: pointer;
   background-color: rgba(255, 166, 0, 0.1);
-  color: white
+  color: white;
 }
 
 .button__icon {

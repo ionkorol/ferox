@@ -1,5 +1,5 @@
 import React from "react";
-import { UserProp } from "../../utils/UserObject";
+import { UserProp } from "../../utils/interfaces";
 import Card from "../Card";
 import HeroInfo from "./HeroInfo";
 import HeroStats from "./HeroStats";

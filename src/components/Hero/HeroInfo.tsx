@@ -1,5 +1,5 @@
 import React from "react";
-import { UserProp } from "../../utils/UserObject";
+import { UserProp } from "../../utils/interfaces";
 
 import "./HeroInfo.css";
 

@@ -1,55 +1,20 @@
 .arena__container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-.arena__heroes {
+.arena__opponent{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  position: relative;
-  padding: 5px 10px;
-  background-image: url(../assets/arena.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin: 10px 0px;
 }
 
 .arena__controls {
   display: flex;
-  align-self: center;
-  justify-content: center;
-  width: 300px;
-  padding: 10px;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.arena__controls > div {
-  margin-right: 10px;
-}
-
-.arena__logs {
-  display: flex;
-  top: 45%;
-  left: 45%;
-  position: absolute;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-
-.arena__logs_opp, .arena__logs_user {
-  display: flex;
-  align-items: center;
-  font-family: Arial;
-  font-weight: 900;
-}
-
-.arena__logs_user {
-  color: rgb(47, 47, 119);
-  
-}
-
-.arena__logs_opp {
-  color: rgb(128, 25, 25);
+.arena__controls > div:first-child {
+  margin-right: 5px;
 }

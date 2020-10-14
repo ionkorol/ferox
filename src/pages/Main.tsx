@@ -24,11 +24,7 @@ const Main: React.FC<Props> = (props) => {
     <Container>
       <Header>Town Center</Header>
       <div>
-        <img
-          src={require('../assets/bg.jpg')}
-          alt=""
-          width="100%"
-        />
+        <img src={require("../assets/bg.jpg")} alt="" width="100%" />
       </div>
       <MenuItem href="/arena" icon="arena">
         Arena
@@ -38,6 +34,9 @@ const Main: React.FC<Props> = (props) => {
       </MenuItem>
       <MenuItem href="/shop" icon="shop">
         Shop
+      </MenuItem>
+      <MenuItem href="/rating" icon="shop">
+        Rating
       </MenuItem>
       <Footer />
       <MenuItem onClick={handleLogout}>Log Out</MenuItem>

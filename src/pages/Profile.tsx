@@ -20,30 +20,34 @@ export const Profile: React.FC<Props> = (props) => {
   return (
     <Container>
       <Header>Hero</Header>
-      <div className="profile__info_container">
-        <div className="profile__info_left">
-          <div className="profile__level">{userData.level}</div>
-          <div className="profile__username_team">
-            <div className="profile__username">
-              <img
-                src={require(`../assets/icons/class/${userData.class}.png`)} width="15" height="15" alt={userData.class}
-              />
-              {userData.username}
+      <div className="profile__container">
+        <div className="profile__info_container">
+          <div className="profile__info_left">
+            <div className="profile__level">{userData.level}</div>
+            <div className="profile__username_team">
+              <div className="profile__username">
+                <img
+                  src={require(`../assets/icons/class/${userData.class}.png`)}
+                  width="15"
+                  height="15"
+                  alt={userData.class}
+                />
+                {userData.username}
+              </div>
+              <div className="profile__team">Guild</div>
             </div>
-            <div className="profile__team">Guild</div>
+          </div>
+          <div className="profile__info_right">
+            <div>Power: {userData.energy.timestamp.seconds}</div>
           </div>
         </div>
-        <div className="profile__info_right">
-          <div>Power: {userData.energy.timestamp.seconds}</div>
-        </div>
+        <Card style={{ width: "fit-content", padding: "5px" }}>
+          <HeroTable items={userData.items} />
+        </Card>
+        <Card style={{ width: "269px", padding: "5px" }}>
+          <HeroStats stats={userData.stats} />
+        </Card>
       </div>
-      <Card style={{ justifyContent: "center" }}>
-        <HeroTable items={userData.items} />
-      </Card>
-      <Card>
-        <HeroStats stats={userData.stats} />
-      </Card>
-
       <MenuItem href="/inventory" icon="inventory">
         Inventory
       </MenuItem>

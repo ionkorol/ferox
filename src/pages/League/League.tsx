@@ -1,128 +1,91 @@
-import { firestore } from "firebase";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { RootStateOrAny, connect } from "react-redux";
 import Button from "../../components/Button";
-import Card from "../../components/Card";
 import Container from "../../components/Container";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
 import HeroStats from "../../components/Hero/HeroStats";
-import { firestoreApp } from "../../utils/firebase";
-import { UserProp, UserObject } from "../../utils/UserObject";
+import * as leagueActions from "../../redux/actions/leagueActions";
+import * as battleActions from "../../redux/actions/battleActions";
+
+import { UserProp } from "../../utils/interfaces";
 
 import "./League.css";
+import { useHistory, useLocation } from "react-router-dom";
+import { useReward } from "../../hooks";
 
 interface Props {
+  loading: boolean;
   userData: UserProp;
+  oppData: UserProp;
+  leagueHandleWin: () => any;
+  leagueGetOpponent: () => any;
+  battleSetOpponent: (userData: UserProp, referer: string) => any;
 }
 
 const League: React.FC<Props> = (props) => {
-  const { userData } = props;
-  const [opponent1, setOpponent1] = useState<UserProp | undefined>();
-  const [opponent2, setOpponent2] = useState<UserProp | undefined>();
+  const {
+    loading,
+    userData,
+    oppData,
+    leagueHandleWin,
+    leagueGetOpponent,
+    battleSetOpponent,
+  } = props;
 
-  const getOpponent = async (ranksFrom: number) => {
-    let league;
-    if (userData.league.rank <= ranksFrom) {
-      if (userData.league.tier === "bronze") {
-        league = "silver";
-      } else if (userData.league.tier === "silver") {
-        league = "gold";
-      } else {
-        league = "gold";
-      }
-    } else {
-      league = userData.league.tier;
-    }
+  const handleReward = useReward;
+  const location = useLocation();
+  const history = useHistory();
 
-    try {
-      const leagueSnap = await firestoreApp
-        .collection("leagues")
-        .doc(league)
-        .get();
+  // Get Opponent
+  useEffect(() => {
+    leagueGetOpponent();
+  }, [userData.league]);
 
-      let rank;
-      if (userData.league.rank - ranksFrom === 0) {
-        rank = "1";
-      } else if (userData.league.rank - ranksFrom === 0) {
-        rank = "2";
-      } else {
-        rank = String(userData.league.rank - ranksFrom);
-      }
-
-      const oppRef: firestore.DocumentReference = leagueSnap.get(rank);
-      const oppSnap = await oppRef.get();
-
-      return oppSnap.data() as UserProp;
-    } catch (error) {
-      return error;
-    }
+  // Handle Attack button
+  const handleAttack = () => {
+    battleSetOpponent(oppData, "/league");
+    history.push("/battle");
   };
 
+  // Handle Result Win
   useEffect(() => {
-    getOpponent(1)
-      .then((data) => setOpponent1(data))
-      .catch((error) => console.log(error));
-    getOpponent(2)
-      .then((data) => setOpponent2(data))
-      .catch((error) => console.log(error));
-  }, []);
+    const locState = location.state as { result: string };
+    console.log(location);
+    if (locState) {
+      if (locState.result === "win") {
+        leagueHandleWin();
+      }
+      handleReward(locState.result);
+      console.log("Ran");
+    }
+  }, [leagueHandleWin, handleReward, location]);
 
-  if (!opponent1 || !opponent2) {
-    return <div>loading</div>;
+  if (loading || !oppData) {
+    return <div>Loading...</div>;
   }
-
-  console.log(opponent2);
 
   return (
     <Container>
       <Header>League</Header>
       <div className="league__container">
         <div className="league__opponent">
-          <Hero
-            userData={opponent2}
-            userHealth={100}
-            userMana={100}
-            heroTable
-          />
+          <Hero userData={oppData} userHealth={100} userMana={100} heroTable />
           <div className="league__right">
             <div>
-              {opponent2.league.tier}
-              {opponent2.league.rank}.
+              {oppData.league.tier}
+              {oppData.league.rank}.
               <img
-                src={require(`../../assets/icons/class/${opponent2.class}.png`)}
+                src={require(`../../assets/icons/class/${oppData.class}.png`)}
                 height="15"
                 width="15"
-                alt={opponent2.class}
+                alt={oppData.class}
               />
-              {opponent2.username}
+              {oppData.username}
             </div>
-            <HeroStats stats={opponent2.stats} />
-            <Button>Attack 1 g</Button>
-          </div>
-        </div>
-        <div className="league__opponent">
-          <Hero
-            userData={opponent1}
-            userHealth={100}
-            userMana={100}
-            heroTable
-          />
-          <div className="league__right">
-            <div>
-              {opponent1.league.tier}
-              {opponent1.league.rank}.
-              <img
-                src={require(`../../assets/icons/class/${opponent1.class}.png`)}
-                height="15"
-                width="15"
-                alt={opponent1.class}
-              />
-              {opponent1.username}
-            </div>
-            <HeroStats stats={opponent1.stats} />
-            <Button>Attack</Button>
+            <HeroStats stats={oppData.stats} />
+            <Button onClick={() => handleAttack()}>Attack</Button>
           </div>
         </div>
       </div>
@@ -134,6 +97,14 @@ const League: React.FC<Props> = (props) => {
 
 const mapState = (state: RootStateOrAny) => ({
   userData: state.userReducer.data,
+  oppData: state.leagueReducer.data,
+  loading: state.leagueReducer.loading,
 });
 
-export default connect(mapState)(League);
+const mapDispatch = {
+  leagueGetOpponent: leagueActions.getOpponent,
+  leagueHandleWin: leagueActions.leagueHandleWin,
+  battleSetOpponent: battleActions.battleSetOpponent,
+};
+
+export default connect(mapState, mapDispatch)(League);

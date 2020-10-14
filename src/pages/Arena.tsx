@@ -1,44 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { connect, RootStateOrAny } from "react-redux";
 
-import * as arenaActions from "../redux/actions/arenaActions";
+import * as battleActions from "../redux/actions/battleActions";
 
 import Button from "../components/Button";
 import Container from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import useCooldown from "../hooks/useCooldown";
+import { useReward } from "../hooks";
 
-import { UserObject, UserProp } from "../utils/UserObject";
+import { UserObject } from "../utils/objects";
 import { getRandomInt } from "../utils/UtilityFunctions";
+import { UserProp } from "../utils/interfaces";
 
 import "./Arena.css";
-import { handleRewards } from "../hooks/Rewards";
 import Hero from "../components/Hero";
+import HeroStats from "../components/Hero/HeroStats";
+import { useHistory, useLocation } from "react-router-dom";
 
 interface Props {
   userData: UserProp;
-  arenaReward: (xp: number) => any;
+  battleSetOpponent: (userData: UserProp, referer: string) => any;
 }
 
 export const Arena: React.FC<Props> = (props) => {
-  const { userData } = props;
+  const { userData, battleSetOpponent } = props;
 
-  const userPower =
-    userData.stats.agility +
-    userData.stats.intelligence +
-    userData.stats.strength;
+  const handleReward = useReward;
+  const history = useHistory()
+  const location = useLocation()
 
   const [oppData, setOppData] = useState(UserObject);
-  const oppPower =
-    oppData.stats.agility + oppData.stats.intelligence + oppData.stats.strength;
-  const [oppHealth, setOppHealth] = useState(oppData.maxHealth);
-  const [oppMana, setOppMana] = useState(oppData.maxMana);
-  const [userHealth, setUserHealth] = useState(userData.maxHealth);
-  const [userMana, setUserMana] = useState(userData.maxMana);
-  const [attackDelay, resetCooldown] = useCooldown(1);
-  const [userAttack, setUserAttack] = useState<number>(userPower);
-  const [oppAttack, setOppAttack] = useState<number>(oppPower);
 
   // Get Next Opponent Random
   const handleNext = () => {
@@ -56,85 +48,49 @@ export const Arena: React.FC<Props> = (props) => {
     );
     oppData.level = getRandomInt(userData.level - 10, userData.level + 10);
     setOppData(oppData);
-    setOppHealth(oppData.maxHealth);
-    setUserHealth(userData.maxHealth);
   };
 
   // Handle Attack
   const handleAttack = () => {
-    if (attackDelay > 0) {
-      return;
-    }
-    setOppHealth((prevState) => prevState - userAttack);
-    setUserHealth((prevState) => prevState - oppAttack);
-    setOppAttack(getRandomInt(oppPower - 10, oppPower + 10));
-    setUserAttack(getRandomInt(userPower - 10, userPower + 10));
-    resetCooldown();
+    battleSetOpponent(oppData, "/arena");
+    history.push('/battle')
   };
 
   // Send Rewards and get next opponent
   useEffect(() => {
-    if (oppHealth <= 0 || userHealth <= 0) {
-      if (oppHealth <= userHealth) {
-        handleRewards("win");
-      } else {
-        handleRewards("loss");
-      }
-      handleNext();
+    const locState = location.state as { result: string };
+    console.log(location);
+    if (locState) {
+      handleReward(locState.result);
+      console.log("Ran");
     }
-  }, [oppHealth, userHealth, handleNext]);
+    handleNext()
+  }, []);
 
   return (
     <Container>
       <Header>Arena</Header>
       <div className="arena__container">
-        <div className="arena__heroes">
-          <Hero
-            userData={userData}
-            userHealth={userHealth}
-            userMana={userMana}
-            heroInfo
-            heroTable
-            heroStats
-          />
-          <div className="arena__logs">
-            {userAttack ? (
-              <div className="arena__logs_user">
-                <img
-                  src={require("../assets/power.png")}
-                  height="20"
-                  width="20"
-                  alt=""
-                />
-                {userAttack}
-              </div>
-            ) : null}
-            {oppAttack ? (
-              <div className="arena__logs_opp">
-                {oppAttack}
-                <img
-                  src={require("../assets/power.png")}
-                  height="20"
-                  width="20"
-                  alt=""
-                />
-              </div>
-            ) : null}
+        <div className="arena__opponent">
+          <Hero userData={oppData} userHealth={100} userMana={100} heroTable />
+          <div className="league__right">
+            <div>
+              {oppData.league.tier}
+              {oppData.league.rank}.
+              <img
+                src={require(`../assets/icons/class/${oppData.class}.png`)}
+                height="15"
+                width="15"
+                alt={oppData.class}
+              />
+              {oppData.username}
+            </div>
+            <HeroStats stats={oppData.stats} />
+            <div className="arena__controls">
+              <Button onClick={handleAttack}>Attack</Button>
+              <Button onClick={handleNext}>New Opponent</Button>
+            </div>
           </div>
-          <Hero
-            userData={oppData}
-            userHealth={oppHealth}
-            userMana={oppMana}
-            heroInfo
-            heroTable
-            heroStats
-          />
-        </div>
-        <div className="arena__controls">
-          <Button onClick={handleAttack} icon={require("../assets/power.png")}>
-            {attackDelay ? `${attackDelay} Seconds` : "Attack"}
-          </Button>
-          <Button onClick={handleNext}>Refresh</Button>
         </div>
       </div>
       <Footer />
@@ -147,7 +103,7 @@ const mapState = (state: RootStateOrAny) => ({
 });
 
 const mapDispatch = {
-  arenaReward: arenaActions.arenaReward,
+  battleSetOpponent: battleActions.battleSetOpponent,
 };
 
 export default connect(mapState, mapDispatch)(Arena);
