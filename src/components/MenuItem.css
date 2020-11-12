@@ -3,14 +3,23 @@
   flex-direction: row;
   padding: 5px 0px;
   margin: 5px 0px;
-  background-color: #252524;
-  border-radius: 5px;
-  box-shadow: 0px 2px 0px 0px rgba(15, 9, 2, 0.7);
+  background: linear-gradient(rgb(40, 40, 40), black, rgb(40, 40, 40));
+  box-shadow: inset 0px 0px 0px 2px #535152;
+  border-radius: 10px;
+}
+
+.menu_item__container::after {
+  content: "";
+  width: 10px;
+  
 }
 
 .menu_item__container:hover {
-  background-color: #3f3c3c;
   cursor: pointer;
+  background: linear-gradient(#72100f, #580c0f, #72100f);
+  box-shadow: inset 0px 0px 0px 2px #535152;
+  color: white;
+  border-radius: 10px;
 }
 
 .menu_item__text {

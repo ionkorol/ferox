@@ -8,10 +8,11 @@ import "./Header.css";
 
 interface Props {
   userData: UserProp;
+  loading: boolean
 }
 
 const Header: React.FC<Props> = (props) => {
-  const { userData } = props;
+  const { userData, loading } = props;
   const [xpWidth, setXpWidth] = useState(0);
 
   // TODO: Add energy time
@@ -75,9 +76,11 @@ const Header: React.FC<Props> = (props) => {
     }
   }, [userData]);
 
-  if (!userData) {
+  if (!userData || loading) {
     return <div className="header__container">Loading...</div>
   }
+
+  console.log(userData.energy)
 
   return (
     <div className="header__container">
@@ -135,6 +138,7 @@ const Header: React.FC<Props> = (props) => {
 
 const mapState = (state: RootStateOrAny) => ({
   userData: state.userReducer.data,
+  loading: state.userReducer.loading
 });
 
 export default connect(mapState)(Header);

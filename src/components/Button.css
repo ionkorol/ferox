@@ -1,15 +1,17 @@
 .button__container {
   display: flex;
   width: fit-content;
-  border-radius: 5px;
-  background-image: url(../assets/btn.svg);
-  background-position: center;
-  box-shadow: 0px 2px 0px 0px rgba(15, 9, 2, 0.7);
+  background: linear-gradient(rgb(40, 40, 40), black, rgb(40, 40, 40));
+  box-shadow: inset 0px 0px 0px 2px gray;
+  border-radius: 10px;
 }
 
 .button__active .button__body {
-  background-color: rgba(255, 166, 0, 0.1);
+  cursor: default;
+  background: linear-gradient(#72100f, #580c0f, #72100f);
+  box-shadow: inset 0px 0px 0px 2px gray;
   color: white;
+  border-radius: 10px;
 }
 
 .button__inactive .button__body {
@@ -19,7 +21,7 @@
 
 .button__inactive .button__body:hover {
   cursor: default;
-  background-color:rgba(78, 78, 78, 0.1);
+  background-color: rgba(78, 78, 78, 0.1);
   color: gray;
 }
 
@@ -28,14 +30,6 @@
   justify-content: center;
   align-items: center;
   padding: 7px 15px;
-  border-radius: 5px;
-  filter: drop-shadow(0px 3px 0.5px rgba(0, 0, 0, 0.25));
-  background-image: linear-gradient(
-    90deg,
-    #0000002d 0%,
-    rgba(0, 0, 0, 0) 50%,
-    #0000002d 100%
-  );
 }
 
 .button__body.small {
@@ -45,8 +39,10 @@
 
 .button__body:hover {
   cursor: pointer;
-  background-color: rgba(255, 166, 0, 0.1);
+  background: linear-gradient(#72100f, #580c0f, #72100f);
+  box-shadow: inset 0px 0px 0px 2px gray;
   color: white;
+  border-radius: 10px;
 }
 
 .button__icon {
